@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 
 import api from '../services/api';
 
-import{View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput} from 'react-native'
+import{View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome'
+import SearchBar from '../components/SearchBar';
 
 export default class Main extends Component{
 
@@ -55,18 +55,15 @@ export default class Main extends Component{
         </View>
     )
 
+    changeTerm = (termo) => {
+        this.setState({term: termo});
+    };
+
     render(){
         return (
             <View style={styles.container}>
-                <View style={styles.containerSearch}>
-                    <Icon style={styles.iconSearch}
-                        name="search"
-                    />
-                    <TextInput style={styles.searchBar}
-                        placeholder = "Pesquisar..."
-                        onChangeText = {(text) => this.setState({term: text})}
-                    />
-                </View>
+
+                <SearchBar estado={this.changeTerm}/>
 
                 <FlatList
                     contentContainerStyle={styles.list}
@@ -86,31 +83,6 @@ const styles = StyleSheet.create({
         flex:1,
         padding:20,
         backgroundColor: "#fafafa"
-    },
-
-    containerSearch: {
-        flexDirection: 'row',
-        borderRadius: 5,
-        borderWidth: 2,
-        marginBottom: 10,
-        borderColor: "#0000ff",
-        height: 50,
-        alignItems: "center",
-        paddingHorizontal:20
-    },
-
-    searchBar: {
-        height: 50,
-        width: 300,
-        fontSize:18,
-        borderRadius: 5,
-        marginLeft: 5,
-        backgroundColor: "transparent"
-    },
-
-    iconSearch: {
-        fontSize: 20,
-        color: "#0000ff"
     },
 
     list:{
